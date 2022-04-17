@@ -243,11 +243,11 @@
 }
 
 #fourth-block .container .fourth-bottom form input {
-  font-size: 24px;
+  font-size: 16px;
 }
 
 #fourth-block .container .fourth-bottom form textarea {
-  font-size: 2px;
+  font-size: 16px;
 }
 
 #fourth-block .container .fourth-bottom form .input_place {
@@ -258,7 +258,7 @@
 }
 
 #fourth-block .container .fourth-bottom form .send_btn {
-  height: 60px;
+  height: 80px;
   display: inline-block;
   vertical-align: middle;
   padding: 12px 24px;

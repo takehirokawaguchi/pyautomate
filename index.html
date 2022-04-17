@@ -76,20 +76,18 @@
       </div>
       <div class="fourth-bottom">
         <!-- Make sure you don't change the form action-->
-        <form action="https://api.staticforms.xyz/submit" method="post">
+        <form action="https://api.staticforms.xyz/submit" method="post" id="staticform">
           <!-- Replace with accesKey sent to your email -->
-          <input type="hidden" name="accessKey" value="2c35f662-ff00-424e-b80a-59f299afbb39">
+          <!--  -->
+          <input type="hidden" name="accessKey" value="9a325ef0-fb5d-4833-9ba8-db7cd5d9676f">
           <p>お名前：</p>
-          <input type="text" name="name" style="height: 50px; font-family: serif;" class="input_place">
-          <p>メールアドレス：</p>
-          <input type="text" name="email" style="height: 50px; font-family: serif;" class="input_place">
-          <p>電話番号：</p>
-          <input type="text" name="phone" style="height: 50px; font-family: serif;" class="input_place">
+          <input type="text" name="name" id="name" style="height: 50px; font-family: serif;" class="input_place">
+          <p>連絡先：</p>
+          <input type="text" name="contact" id="contact" style="height: 50px; font-family: serif;" class="input_place">
           <p>お問い合わせ内容：</p>
-          <textarea name="message" style="height: 200px; font-family: serif;" class="input_place"></textarea>
+          <textarea name="message" id="message" style="height: 200px; font-family: serif;" class="input_place"></textarea>
           <!-- If you want form to redirect to a specific url after submission -->
-          <input type="hidden" name="redirectTo" value="./#contact">
-          <input type="submit" value="送信" class="send_btn">
+          <button type="submit" value="送信" class="send_btn">送信</button>
           <!-- If we receive data in this field submission will be ignored -->
           <input type="text" name="honeypot" style="display: none;">
         </form>
@@ -99,6 +97,35 @@
   <footer>
     <p>Copyright ©︎ 2022 Takehiro Kawaguchi All Rights Reserved.</p>
   </footer>
+  <script type="text/javascript">
+    // find elements
+  $("#staticform").submit(function(event) {
+    console.log('クリック');
+    event.preventDefault();
+
+    // id属性で要素を取得
+    var form_element = document.getElementById('staticform');
+    var new_element = document.createElement('p');
+    new_element.textContent = 'お問い合わせを送信しました。';
+    // 指定した要素の前に挿入
+    form_element.before(new_element);
+
+      $.ajax({
+        url: 'https://api.staticforms.xyz/submit', // url where to submit the request
+        type: "POST", // type of action POST || GET
+        dataType: 'json', // data type
+        data: $("#staticform").serialize(), // post data || get data
+        success: function(result) {
+          // you can see the result from the console
+          // tab of the developer tools
+          window.alert(JSON.parse(result));
+        },
+        error: function(xhr, resp, text) {
+          window.alert(xhr, resp, text);
+        }
+      })
+    });
+  </script>
   <script type="text/javascript" src="./main.js"></script>
 </body>
 
